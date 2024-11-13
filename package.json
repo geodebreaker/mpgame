@@ -1,0 +1,23 @@
+{
+  "name": "mpgame",
+  "version": "1.0.0",
+  "description": "hell",
+  "main": "svr/node.js",
+  "scripts": {
+    "start": "node svr/node.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geodebreaker/mpgame.git#main"
+  },
+  "author": "geodebreaker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geodebreaker/mpgame/issues"
+  },
+  "homepage": "https://github.com/geodebreaker/mpgame/tree/main#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
