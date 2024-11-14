@@ -1,55 +1,55 @@
-# .github/workflows/deploy.yml
-name: Deploy to Elastic Beanstalk
+# # .github/workflows/deploy.yml
+# name: Deploy to Elastic Beanstalk
 
-on:
-  push:
-    branches:
-      - main  # Adjust the branch as needed
+# on:
+#   push:
+#     branches:
+#       - main  # Adjust the branch as needed
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Ping discord 1
-        env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"content":"Starting update..."}' $WEBHOOK_URL
+#     steps:
+#       - name: Ping discord 1
+#         env:
+#           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+#         run: |
+#           curl -X POST -H "Content-Type: application/json" -d '{"content":"Starting update..."}' $WEBHOOK_URL
 
-      - name: Checkout repository
-        uses: actions/checkout@v3
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      - name: Set up Node.js (if you have a Node.js application)
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20' # Set to your Node version
+#       - name: Set up Node.js (if you have a Node.js application)
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '20' # Set to your Node version
 
-      - name: Install dependencies
-        run: npm install # Adjust if you’re using a different language/environment
+#       - name: Install dependencies
+#         run: npm install # Adjust if you’re using a different language/environment
 
-      - name: Zip application files
-        run: zip -r deploy.zip . -x node_modules -x .github -x .vscode -x resources
+#       - name: Zip application files
+#         run: zip -r deploy.zip . -x node_modules -x .github -x .vscode -x resources
 
-      - name: Deploy to Elastic Beanstalk
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          EB_APP_NAME: ${{ secrets.EB_APP_NAME }}
-          EB_ENV_NAME: ${{ secrets.EB_ENV_NAME }}
-        run: |
-          # Install the Elastic Beanstalk CLI
-          pip install --upgrade pip
-          pip install awsebcli
+#       - name: Deploy to Elastic Beanstalk
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           AWS_REGION: ${{ secrets.AWS_REGION }}
+#           EB_APP_NAME: ${{ secrets.EB_APP_NAME }}
+#           EB_ENV_NAME: ${{ secrets.EB_ENV_NAME }}
+#         run: |
+#           # Install the Elastic Beanstalk CLI
+#           pip install --upgrade pip
+#           pip install awsebcli
 
-          # Initialize EB CLI and deploy
-          yes no | eb init "$EB_APP_NAME" --region "$AWS_REGION" --platform "node.js" -i
-          yes | eb use "$EB_ENV_NAME"
-          yes | eb deploy --staged
+#           # Initialize EB CLI and deploy
+#           yes no | eb init "$EB_APP_NAME" --region "$AWS_REGION" --platform "node.js" -i
+#           yes | eb use "$EB_ENV_NAME"
+#           yes | eb deploy --staged
 
-      - name: Ping discord 2
-        env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"content":"Updated code (<https://evrtdg.com>)"}' $WEBHOOK_URL
+#       - name: Ping discord 2
+#         env:
+#           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+#         run: |
+#           curl -X POST -H "Content-Type: application/json" -d '{"content":"Updated code (<https://evrtdg.com>)"}' $WEBHOOK_URL
