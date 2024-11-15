@@ -6,10 +6,12 @@ var getime = Date.now();
 var WIDTH = innerWidth;
 var HEIGHT = innerHeight;
 
-document.addEventListener("DOMContentLoaded", () => {
+document.onclick = () => {
+  document.onclick = null;
+  $('#click').style.display = "none";
   start();
   geloop();
-});
+};
 
 function rect(x, y, w, h, c) {
   if (c) _.fillStyle = c;

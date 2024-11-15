@@ -1,6 +1,24 @@
 body {
   margin: 0px;
-  /* background: #222; */
   overflow: clip;
   background: #000;
+  color: white;
+  font-family: monospace;
+  font-size: 30px;
+}
+
+#click {
+  position: absolute;
+  left: calc(50vw - 2em);
+  top: calc(50vh - 15px);
+  user-select: none;
+  cursor: pointer;
+}
+
+#goob {
+  position: absolute;
+  left: calc(50vw - 300px);
+  top: calc(50vh - 300px);
+  width: 600px;
+  height: 600px;
 }
